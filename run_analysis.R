@@ -117,7 +117,7 @@ c <- merge(activities,b, by = intersect(names(b),names(activities)))
 g<- group_by(c,PersonId,Activity) 
 d<-summarise_at(g, .cols = 4:89, .funs = c(Mean="mean"))
 print(d)
-write.csv(d,"tidy_dataset.csv")
+write.table(d,"tidy_dataset.txt", row.names = F)
 
 
 
