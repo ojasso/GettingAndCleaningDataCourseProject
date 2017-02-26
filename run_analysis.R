@@ -1,5 +1,6 @@
 rm(list = ls())
 cat("\f")
+library(dplyr)
 
 colnames <- read.table("./features.txt")
 
@@ -102,6 +103,7 @@ n <- gsub("^t","time",n)
 n <- gsub("^f","frequency",n)
 n <- gsub("Gyro","Gyroscope",n)
 n <- gsub("Acc","Acceleration",n)
+n <- gsub("tBody","TimeBody",n)
 b<-a
 names(b) <-n
 names(b)
@@ -114,7 +116,7 @@ c <- merge(activities,b, by = intersect(names(b),names(activities)))
 #5 From the data set in step 4, creates a second, independent tidy data set with the average of each variable for each activity and each subject.
 g<- group_by(c,PersonId,Activity) 
 d<-summarise_at(g, .cols = 4:89, .funs = c(Mean="mean"))
-
+print(d)
 write.csv(d,"tidy_dataset.csv")
 
 
